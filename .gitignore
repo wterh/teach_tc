@@ -1,0 +1,27 @@
+.idea
+_trash
+/logs/*
+/_db_backups/*
+Nginx-1.14_vhost.conf
+test.php
+fckgen.php
+
+# Linux
+*~
+*.swp
+.user.ini
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Mac OS X
+.DS_Store
+._*
+
+# Composer
+/composer.phar
+/vendor
+
+#dev
+/_!wtl
