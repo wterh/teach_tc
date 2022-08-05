@@ -46,14 +46,14 @@ class MainController extends Controller
         $keywords = $keywordsModel->getAllKeywords($relations);
 
         $data = [];
+        // Step 4 - compare data
         foreach($knowledges as $knowledge) {
             $data[$knowledge['id']]['name'] = $knowledge['name'];
-            
+
             if(isset($keywords[$knowledge['id']])) {
-                $data['keywords'] = $keywords[$knowledge['id']];
+                $data[$knowledge['id']]['keywords'] = $keywords[$knowledge['id']];
             }
         }
-
 
         $vars = [
             'title' => 'Области знаний',

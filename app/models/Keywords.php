@@ -50,24 +50,4 @@ class Keywords extends Table
         }
         return $result;
     }
-
-    public function editKeywords(array $array)
-    {
-        $keywordsAll = $this->getAll();
-        $keys = [];
-        print_r($keywordsAll);
-        foreach($keywordsAll as $keyword) {
-            $keys[] = $keyword['id'];
-        }
-print_r($keys);
-        $result = [];
-        foreach($array['keywords'] as $element) {
-            if (in_array($element, $keys)) {
-                $result[] = $element;
-            }
-        }
-        print_r($result);
-die;
-        return $result;
-    }
 }
