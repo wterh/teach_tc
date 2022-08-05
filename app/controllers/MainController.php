@@ -67,6 +67,9 @@ class MainController extends Controller
     public function addKnowledgeAction()
     {
         if (!empty($_POST)) {
+            if(empty($_POST['knowledge'])) {
+                $this->view->redirect('/knowledge/add');
+            }
             $knowledgeModel = new Knowledge();
             $knowledge = $knowledgeModel->addKnowledge($_POST['knowledge']);
 

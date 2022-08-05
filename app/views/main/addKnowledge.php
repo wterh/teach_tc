@@ -15,7 +15,7 @@
 
                         <div class="form-group">
                             <label for="title">Название области знания</label>
-                            <input type="text" class="form-control" name="knowledge" placeholder="Укажите название области">
+                            <input type="text" class="form-control" name="knowledge" required placeholder="Укажите название области">
                         </div>
                         <div class="form-group">
                             <label for="description">Выберите ключевые слова</label>
