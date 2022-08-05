@@ -47,10 +47,11 @@ class MainController extends Controller
 
         $data = [];
         foreach($knowledges as $knowledge) {
-            $data[$knowledge['id']] = [
-                'name' => $knowledge['name'],
-                'keywords' => $keywords[$knowledge['id']]
-            ];
+            $data[$knowledge['id']]['name'] = $knowledge['name'];
+            
+            if(isset($keywords[$knowledge['id']])) {
+                $data['keywords'] = $keywords[$knowledge['id']];
+            }
         }
 
 
@@ -69,10 +70,12 @@ class MainController extends Controller
             $knowledgeModel = new Knowledge();
             $knowledge = $knowledgeModel->addKnowledge($_POST['knowledge']);
 
-            $relationsModel = new Relationship();
-            $relations = $relationsModel->addRelations(['id' => $knowledge, 'keywords' => $_POST['keywords']]);
+            if(!empty($_POST['keywords'])) {
+                $relationsModel = new Relationship();
+                $relationsModel->addRelations(['id' => $knowledge, 'keywords' => $_POST['keywords']]);
+            }
 
-            if ($knowledge && $relations) {
+            if ($knowledge) {
                 $this->view->redirect('/knowledge');
             } else {
                 $this->view->redirect('/knowledge/add');
@@ -97,9 +100,13 @@ class MainController extends Controller
                 $knowledgeModel = new Knowledge();
                 $knowledgeModel->edit(['name' => $knowledge], $this->route['id']);
 
-                $keywords = $_POST['keywords'];
                 $relationModel = new Relationship();
-                $relationModel->checkKeys($keywords, $this->route['id']);
+                if(!empty($_POST['keywords'])) {
+                    $keywords = $_POST['keywords'];
+                    $relationModel->checkKeys($keywords, $this->route['id']);
+                } else {
+                    $relationModel->deleteRelations($this->route['id']);
+                }
 
                 $this->view->redirect('/');
             }
